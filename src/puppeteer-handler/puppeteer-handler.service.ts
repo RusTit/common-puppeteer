@@ -30,6 +30,9 @@ const DEFAULT_PAGE_WIDTH = 1920;
 const DEFAULT_PAGE_HEIGHT = 1040;
 const DEFAULT_URL_NAVIGATION_WAIT = 10000;
 
+// If need to extract images from the canvas directly
+// https://stackoverflow.com/questions/56165205/canvas-drawing-not-loading-in-puppeteer
+
 @Injectable()
 export class PuppeteerHandlerService {
   async getBrowserInstance(): Promise<Browser> {
