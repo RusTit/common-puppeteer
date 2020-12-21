@@ -62,18 +62,12 @@ export class PuppeteerHandlerService {
     return page;
   }
 
-  async run(): Promise<void> {
+  async run(url: string): Promise<void> {
     let browser: Browser | undefined;
     try {
-      const url = process.env.URL_TO_OPEN;
-      if (!url) {
-        throw new Error(
-          `Invalid usage. Environment variable URL_TO_OPEN is not set.`,
-        );
-      }
       browser = await this.getBrowserInstance();
       const page = await this.getPage(browser);
-      Logger.debug('Navigation started (opening the url');
+      Logger.debug(`Navigation started (opening the url: ${url})`);
       await page.goto(url);
       Logger.debug('Navigation finished');
       const delayMs = getSafeNumber(
