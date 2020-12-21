@@ -1,5 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PuppeteerHandlerService } from './puppeteer-handler.service';
+import {
+  PuppeteerHandlerService,
+  getSafeNumber,
+} from './puppeteer-handler.service';
 
 describe('PuppeteerHandlerService', () => {
   let service: PuppeteerHandlerService;
@@ -14,5 +17,20 @@ describe('PuppeteerHandlerService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('check getSafeNumber', () => {
+    expect(getSafeNumber(undefined, 1)).toBe(1);
+    expect(getSafeNumber('', 2)).toBe(2);
+    expect(getSafeNumber('ad', 3)).toBe(3);
+    expect(getSafeNumber(4, 5)).toBe(4);
+    expect(getSafeNumber('4', 5)).toBe(4);
+  });
+
+  it('check delay', async () => {
+    jest.setTimeout(15000);
+    const now = new Date();
+    await service.delay();
+    expect(new Date().getTime() - now.getTime()).toBeGreaterThanOrEqual(1000);
   });
 });

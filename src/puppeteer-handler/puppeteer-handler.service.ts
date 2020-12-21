@@ -13,10 +13,7 @@ export const NAVIGATION_EARLIEST: NavigationOptions = {
   waitUntil: 'domcontentloaded',
 };
 
-export function getSafeNumber(
-  value: string | undefined,
-  defaultValue: number,
-): number {
+export function getSafeNumber(value: any, defaultValue: number): number {
   if (value) {
     const parsedValue = Number.parseInt(value.toString(), 10);
     if (Number.isFinite(parsedValue)) {
